@@ -1,0 +1,38 @@
+.login-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.img-container {
+  background-color: #0d28a6;
+  margin: 0;
+  padding: 0;
+  img {
+    max-width: 100%;
+    max-height: auto;
+    object-fit: cover;
+  }
+}
+
+.login-btn {
+  background-color: #0d28a6;
+  color: #ffffff;
+  min-width: 100%;
+
+  &:hover {
+    background-color: #4a63d3;
+    color: #ffffff;
+  }
+}
+
+.login-container p {
+  font-size: 14px;
+  font-weight: 100;
+  a {
+    color: #0d28a6;
+  }
+}
+.login-container h3 {
+  font-size: 24px;
+  font-weight: bold;
+}

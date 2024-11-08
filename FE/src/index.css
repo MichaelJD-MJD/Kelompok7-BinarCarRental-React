@@ -1,0 +1,11 @@
+body {
+  background-color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.bg {
+  background-color: #f1f3ff;
+}

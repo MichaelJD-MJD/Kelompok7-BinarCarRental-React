@@ -1,0 +1,22 @@
+.sidebar-container {
+  display: flex;
+  min-height: 100%;
+}
+.sidebar-container-menu {
+  font-size: 10px;
+  background-color: #0d28a6;
+  color: white;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sidebar-container-menu a {
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar-container-content a {
+  text-decoration: none;
+  color: black;
+}

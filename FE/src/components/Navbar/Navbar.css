@@ -1,0 +1,52 @@
+.navbar-container .profilePicture-btn {
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Jarak antara icon profile dan nama */
+}
+
+.navbar-container .profilePicture-btn .profilePicture-img {
+  max-width: 40px; /* Ukuran logo sesuai kebutuhan */
+  height: auto;
+}
+
+.navbar-container form {
+  margin-right: 8px; /* Jarak antara form search dan elemen profile */
+}
+
+.navbar-container .btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Responsivitas untuk layar kecil */
+@media (max-width: 576px) {
+  .navbar-container .navbar-nav {
+    flex-direction: column; /* Ubah menjadi kolom untuk perangkat kecil */
+    align-items: flex-start; /* Rata kiri */
+  }
+
+  .navbar-container form {
+    margin-right: 0; /* Hilangkan margin kanan pada form */
+    margin-bottom: 8px; /* Tambahkan margin bawah untuk jarak */
+    width: 100%; /* Penuhi lebar form */
+  }
+
+  .navbar-container .profilePicture-btn {
+    width: 100%; /* Penuhi lebar untuk tombol profile */
+    justify-content: flex-start; /* Rata kiri untuk isi tombol */
+  }
+}
+
+/* Responsivitas untuk tablet */
+@media (min-width: 576px) and (max-width: 768px) {
+  .navbar-container .navbar-nav {
+    flex-direction: row; /* Kembalikan ke baris untuk tablet */
+    justify-content: flex-end; /* Rata kanan */
+  }
+
+  .navbar-container form {
+    margin-bottom: 0; /* Hilangkan margin bawah pada form */
+  }
+}

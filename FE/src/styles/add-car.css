@@ -1,0 +1,54 @@
+.content-container-add {
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  height: calc(91vh - 3px);
+  overflow-x: hidden;
+}
+
+.content-container-add .add-form {
+  background-color: white;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: lighter;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content-container-add .add-form .action-btn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.content-container-add .add-form .action-btn button {
+  min-width: 100px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.content-container-add .add-form .action-btn button a {
+  text-decoration: none;
+  color: white;
+}
+
+.content-container-add .add-form .action-btn .btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.content-container-add .add-form .action-btn .btn-danger:hover {
+  background-color: #b02a37;
+}
+
+.content-container-add .add-form .action-btn .btn-primary {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.content-container-add .add-form .action-btn .btn-primary:hover {
+  background-color: #0a58ca;
+}
