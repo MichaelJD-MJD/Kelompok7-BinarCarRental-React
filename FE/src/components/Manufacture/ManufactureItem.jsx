@@ -1,39 +1,73 @@
-// import React from "react";
-// import { Link } from "@tanstack/react-router";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { Col } from "react-bootstrap";
 import "../Manufacture/ManufactureItem.css";
-import carImg from "../../assets/car01.min.jpg";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { confirmAlert } from "react-confirm-alert";
+import { deleteManufacture } from "../../service/manufacture";
+import { toast } from "react-toastify";
 
 const ManufactureItem = ({ manufacture }) => {
+    const { id } = manufacture;
+    const navigate = useNavigate();
+
+    const onDelete = (event) => {
+        event.preventDefault();
+
+        confirmAlert({
+            title: "Confirm to delete",
+            message: "Are you sure to delete this data?",
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: async () => {
+                        const result = await deleteManufacture(id);
+                        if (result?.success) {
+                            navigate({ to: "/manufactures" });
+                            return;
+                        }
+
+                        toast.error(result?.message);
+                    },
+                },
+                {
+                    label: "No",
+                    onClick: () => {},
+                },
+            ],
+        });
+    };
+
     return (
-        <Col md={3}>
-            <div className="">
-                <Card style={{ width: "18rem" }}>
-                    <Card.Img variant="top" src={carImg} />
+        <Col>
+            <div className="pb-4">
+                <Card style={{ width: "18rem" }} className="">
+                    <Card.Img variant="top" className="p-4" style={{ height: "12rem" }} src={manufacture?.logo} />
                     <Card.Body>
-                        <Card.Title>{manufacture?.name}nama</Card.Title>
-                        <Card.Text>
-                            {manufacture?.description}deskripsi
-                        </Card.Text>
+                        <Card.Title>{manufacture?.name}</Card.Title>
+                        <Card.Text>{manufacture?.description}</Card.Text>
                     </Card.Body>
-                    <ListGroup className="list-group-flush">
+                    <ListGroup
+                        variant="flush"
+                        className="list-group-horizontal justify-content-around"
+                    >
                         <ListGroup.Item>
-                            {manufacture?.establishment}tahun
+                            {manufacture?.establishment}
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                            {manufacture?.country}kota
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            {manufacture?.office}office
-                        </ListGroup.Item>
+                        <ListGroup.Item>{manufacture?.country}</ListGroup.Item>
+                    </ListGroup>
+                    <ListGroup
+                        variant="flush"
+                        className="align-items-center"
+                    >
+                        <ListGroup.Item>{manufacture?.office}</ListGroup.Item>
                     </ListGroup>
                     <Card.Body className="d-flex flex-row justify-content-center">
                         <Button
-                            className="btn-del btn btn-primary px-4 p-2 me-2"
+                            className="btn-del btn btn-primary px-4 p-2 mx-1"
+                            onAbort={onDelete}
                             variant="danger"
                         >
                             <svg
@@ -75,7 +109,9 @@ const ManufactureItem = ({ manufacture }) => {
                             &nbsp;Delete
                         </Button>
                         <Button
-                            className="btn-up btn btn-primary px-4 p-2 me-2"
+                            className="btn-up btn btn-primary px-4 p-2 mx-1"
+                            as={Link}
+                            href={`/manufactures/edit/${manufacture?.id}`}
                             variant="success"
                         >
                             <svg
@@ -112,7 +148,7 @@ const ManufactureItem = ({ manufacture }) => {
                                     </clipPath>
                                 </defs>
                             </svg>
-                            Edit
+                            &nbsp;Edit
                         </Button>
                     </Card.Body>
                 </Card>

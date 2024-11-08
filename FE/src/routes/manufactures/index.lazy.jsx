@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
-// import { useSelector } from "react-redux";
-// import { Row, Col } from "react-bootstrap";
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { useSelector } from "react-redux";
+import { Row, Col } from "react-bootstrap";
+import { createLazyFileRoute, Link } from "@tanstack/react-router";
 
 import plusIc from "../../assets/icon/fi_plus.png";
-// import keyIc from "../../assets/icon/fi_key.png";
-// import clockIc from "../../assets/icon/fi_clock.png";
-// import trashIc from "../../assets/icon/fi_trash-2.png";
-// import editIc from "../../assets/icon/fi_edit.png";
-// import carImg from "../../assets/car01.min.jpg";
 import beepImg from "../../assets/img-BeepBeep.png";
 import "../../styles/manufactures/manufacture.css";
+
 import ManufactureItem from "../../components/Manufacture/ManufactureItem";
 import { getManufacture } from "../../service/manufacture";
 
@@ -20,44 +15,44 @@ export const Route = createLazyFileRoute("/manufactures/")({
 });
 
 function Index() {
-    // const {token} = useSelector((state) => state.auth)
+    const { token } = useSelector((state) => state.auth);
     const [manufacture, setManufacture] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const getManufactureData = async () => {
-            // setIsLoading(true);
+            setIsLoading(true);
             const result = await getManufacture();
             if (result.success) {
                 setManufacture(result.data);
             }
-            // setIsLoading(false);
+            setIsLoading(false);
         };
 
-        // if (token) {
+        if (token) {
             getManufactureData();
-        // }
-    }, []);
+        }
+    }, [token]);
 
-    // if (!token) {
-    //     return (
-    //         <Row className="mt-4">
-    //             <Col>
-    //                 <h1 className="text-center">
-    //                     Please login first to get cars data!
-    //                 </h1>
-    //             </Col>
-    //         </Row>
-    //     );
-    // }
+    if (!token) {
+        return (
+            <Row className="mt-4">
+                <Col>
+                    <h1 className="text-center">
+                        Please login first to get cars data!
+                    </h1>
+                </Col>
+            </Row>
+        );
+    }
 
-    // if (isLoading) {
-    //     return (
-    //         <Row className="mt-4">
-    //             <h1>Loading...</h1>
-    //         </Row>
-    //     );
-    // }
+    if (isLoading) {
+        return (
+            <Row className="mt-4">
+                <h1>Loading...</h1>
+            </Row>
+        );
+    }
 
     return (
         <div className="container-fluid content-container p-3">
@@ -69,7 +64,7 @@ function Index() {
                     <button className="btn add-btn">
                         <img src={plusIc} alt="" />
                         <span>
-                            <Link to={"/addManufacture"}>
+                            <Link to={"/manufactures/create"}>
                                 Add New Manufacture
                             </Link>
                         </span>
@@ -92,48 +87,20 @@ function Index() {
                     </button>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-3 mb-2 p-0">
-                    {/* <div className="">
-                        <ManufactureItem />
-                    </div> */}
-                    {manufacture.length === 0 ? (
-                        <h1>Student data is not found!</h1>
-                    ) : (
-                        manufacture.map((manufacture) => (
-                            <ManufactureItem student={manufacture} key={manufacture?.id} />
-                        ))
-                    )}
-                    {/* <div className="card">
-                        <img
-                            src={carImg}
-                            className="card-img-top card-img img-fluid"
-                            alt="..."
+            {/* <div className="d-flex justify-content-start"> */}
+            <div className="d-flex flex-wrap justify-content-start">
+                {/* <div className="d-flex justify-content-start"> */}
+                {manufacture.length === 0 ? (
+                    <h1>Manufacture data is not found!</h1>
+                ) : (
+                    manufacture.map((manufacture) => (
+                        <ManufactureItem
+                            manufacture={manufacture}
+                            key={manufacture?.id}
                         />
-                        <div className="card-body">
-                            <h5 className="card-title">name</h5>
-                            <h6>establishment</h6>
-                            <p>office - country</p>
-                            <p>description</p>
-                            <div className="text-center">
-                                <a
-                                    href="#"
-                                    className="btn btn-primary delete-btn px-4 p-2 me-2"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteConfirmation"
-                                >
-                                    <img src={trashIc} alt="" /> Delete
-                                </a>
-                                <Link
-                                    to={"/update-car"}
-                                    className="btn btn-primary edit-btn px-4 p-2"
-                                >
-                                    <img src={editIc} alt="" /> Edit
-                                </Link>
-                            </div>
-                        </div>
-                    </div> */}
-                </div>
+                    ))
+                )}
+                {/* </div> */}
             </div>
 
             {/* Modal For Delete Confirmation */}
