@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import { getTypes } from "../service/types-service";
 import TypesItem from "../components/types_components/TypesItem";
 import { Breadcrumb, Button } from "react-bootstrap";
+import Protected from "../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/types")({
   component: () => (

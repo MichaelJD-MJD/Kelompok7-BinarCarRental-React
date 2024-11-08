@@ -10,6 +10,7 @@ import "../styles/list-car.css";
 import { getCars } from "../service/car/car.service.index";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Protected from "../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/")({
   component: () => (
