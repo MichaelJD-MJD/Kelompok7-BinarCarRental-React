@@ -8,9 +8,14 @@ import { useSelector } from "react-redux";
 import { deleteType, getDetailType } from "../../service/types-service";
 import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
+import Protected from "../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/types-routes/$id")({
-  component: TypeDetail,
+  component: () => (
+    <Protected roles={[1]}>
+      <TypeDetail />
+    </Protected>
+  ),
 });
 
 function TypeDetail() {

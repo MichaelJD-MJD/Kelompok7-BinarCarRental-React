@@ -46,6 +46,7 @@ exports.createCar = async (data, file) => {
     data.year = Number(data.year);
     data.options ? JSON.stringify(data.options) : null;
     data.specs ? JSON.stringify(data.specs) : null;
+    data.availableAt = data.availableAt ? new Date(data.availableAt) : null;
 
     return carRepository.createCar(data);
 };
@@ -79,6 +80,7 @@ exports.updateCar = async (id, data, file) => {
     data.year = Number(data.year);
     data.options ? JSON.stringify(data.options) : null;
     data.specs ? JSON.stringify(data.specs) : null;
+    data.availableAt = data.availableAt ? new Date(data.availableAt) : null;
 
     const updatedCar = await carRepository.updateCar(id, data);
     if (!updatedCar) {

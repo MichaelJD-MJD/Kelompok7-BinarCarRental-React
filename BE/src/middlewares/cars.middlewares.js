@@ -52,8 +52,8 @@ exports.validateCreateCar = (req, res, next) => {
         available: z.coerce.boolean(),
         type_id: z.string(),
         year: z.coerce.number(),
-        options: z.array(z.string()).nullable().optional(),
-        specs: z.array(z.string()).nullable().optional(),
+        options: z.string().nullable().optional(),
+        specs: z.string().nullable().optional(),
     });
 
     const resultValidateBody = validateBody.safeParse(req.body);
@@ -98,8 +98,8 @@ exports.validateUpdateCar = (req, res, next) => {
         available: z.coerce.boolean(),
         type_id: z.string(),
         year: z.coerce.number(),
-        options: z.array(z.string()).nullable().optional(),
-        specs: z.array(z.string()).nullable().optional(),
+        options: z.string().nullable().optional(),
+        specs: z.string().nullable().optional(),
     });
 
     const resultValidateBody = validateBody.safeParse(req.body);
