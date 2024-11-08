@@ -5,19 +5,23 @@ import clockIc from "../assets/icon/fi_clock.png";
 import trashIc from "../assets/icon/fi_trash-2.png";
 import editIc from "../assets/icon/fi_edit.png";
 import carImg from "../assets/car01.min.jpg";
-import beepImg from "../assets/img-BeepBeep.png"
+import beepImg from "../assets/img-BeepBeep.png";
 import "../styles/list-car.css";
 import { getCars } from "../service/car/car.service.index";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export const Route = createLazyFileRoute("/")({
-  component: Index,
+  component: () => (
+    <Protected roles={[1]}>
+      <Index />
+    </Protected>
+  ),
 });
 
 function Index() {
   const { token } = useSelector((state) => state.auth);
-  
+
   const navigate = useNavigate();
 
   const [cars, setCars] = useState([]);
@@ -25,7 +29,7 @@ function Index() {
   useEffect(() => {
     const getCarData = async () => {
       const result = await getCars();
-      if(result.success) {
+      if (result.success) {
         setCars(result.data);
       }
     };

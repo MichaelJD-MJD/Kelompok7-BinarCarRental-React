@@ -9,7 +9,11 @@ import TypesItem from "../components/types_components/TypesItem";
 import { Breadcrumb, Button } from "react-bootstrap";
 
 export const Route = createLazyFileRoute("/types")({
-  component: Types,
+  component: () => (
+    <Protected roles={[1]}>
+      <Types />
+    </Protected>
+  ),
 });
 
 function Types() {
@@ -20,12 +24,23 @@ function Types() {
 
   useEffect(() => {
     const getTypesData = async () => {
-      setIsLoading(true);
-      const result = await getTypes();
-      if (result.success) {
-        setTypes(result.data);
+      try {
+        setIsLoading(true);
+        console.log("Fetching types data...");
+        const result = await getTypes();
+        console.log("Result from getTypes:", result);
+
+        if (result.success) {
+          setTypes(result.data);
+        } else {
+          console.warn("Failed to fetch types data");
+        }
+      } catch (error) {
+        console.error("Error fetching types data:", error);
+      } finally {
+        setIsLoading(false);
+        console.log("Finished loading types data");
       }
-      setIsLoading(false);
     };
 
     if (token) {
@@ -55,7 +70,6 @@ function Types() {
     <>
       <Row className="d-flex justify-content-between align-items-center mt-3">
         <Col xs="auto">
-          {/* Breadcrumb di kiri */}
           <Breadcrumb>
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
             <Breadcrumb.Item href="/types">Types</Breadcrumb.Item>

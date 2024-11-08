@@ -10,7 +10,11 @@ import { toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 
 export const Route = createLazyFileRoute("/types-routes/$id")({
-  component: TypeDetail,
+  component: () => (
+    <Protected roles={[1]}>
+      <TypeDetail />
+    </Protected>
+  ),
 });
 
 function TypeDetail() {

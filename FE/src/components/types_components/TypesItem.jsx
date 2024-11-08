@@ -7,6 +7,9 @@ import Button from "react-bootstrap/Button";
 import { useSelector } from "react-redux";
 import { deleteType, getDetailType } from "../../service/types-service";
 import { toast } from "react-toastify";
+import Delete from "../../assets/fi_trash-2.png";
+import Edit from "../../assets/fi_edit.png";
+import DeleteConfirm from "../../assets/img-BeepBeep.png";
 
 const TypeItem = ({ type }) => {
   const navigate = useNavigate();
@@ -61,7 +64,7 @@ const TypeItem = ({ type }) => {
                 }}
               >
                 <img
-                  src="/assets/image/fi_trash-2.png"
+                  src={Delete}
                   alt="Delete Icon"
                   style={{ width: 20, height: 20, marginRight: 8 }}
                 />
@@ -76,7 +79,7 @@ const TypeItem = ({ type }) => {
                 to={`/types-routes/edit/${type?.id}`}
               >
                 <img
-                  src="/assets/image/fi_edit.png"
+                  src={Edit}
                   alt="Edit Icon"
                   style={{ width: 20, height: 20, marginRight: 8 }}
                 />
@@ -101,11 +104,7 @@ const TypeItem = ({ type }) => {
             <div className="modal-content">
               <div className="modal-body">
                 <div className="text-center">
-                  <img
-                    src="../../../public/assets/image/img-BeepBeep.png"
-                    alt=""
-                    className="w-50"
-                  />
+                  <img src={DeleteConfirm} alt="" className="w-50" />
                   <h5>Menghapus Data Mobil</h5>
                   <p>
                     Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin
