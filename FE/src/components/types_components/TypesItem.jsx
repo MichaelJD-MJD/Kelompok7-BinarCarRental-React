@@ -35,11 +35,11 @@ const TypeItem = ({ type }) => {
       const result = await deleteType(typeToDelete.id); // Use the selected type's ID to delete
       if (result?.success) {
         toast.success("Type deleted successfully");
-        navigate({ to: "/types" });
+        navigate({ to: "/types", replace: true });
       } else {
         toast.error(result?.message || "Failed to delete");
       }
-      setShowModal(false); // Hide the modal after action
+      setShowModal(false);
     }
   };
 
