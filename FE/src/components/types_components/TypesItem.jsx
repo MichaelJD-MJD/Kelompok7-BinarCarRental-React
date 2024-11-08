@@ -59,8 +59,8 @@ const TypeItem = ({ type }) => {
                 className="d-flex align-items-center"
                 style={{ fontWeight: 700, padding: "0.5rem 1.6rem" }}
                 onClick={() => {
-                  setTypeToDelete(type); // Set the type to be deleted
-                  setShowModal(true); // Show the modal
+                  setTypeToDelete(type);
+                  setShowModal(true);
                 }}
               >
                 <img
@@ -90,7 +90,6 @@ const TypeItem = ({ type }) => {
         </Card.Body>
       </Card>
 
-      {/* Delete Confirmation Modal */}
       {showModal && (
         <div
           className="modal fade show"
