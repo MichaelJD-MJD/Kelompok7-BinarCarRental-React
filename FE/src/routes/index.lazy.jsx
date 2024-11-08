@@ -7,7 +7,7 @@ import editIc from "../assets/icon/fi_edit.png";
 import carImg from "../assets/car01.min.jpg";
 import beepImg from "../assets/img-BeepBeep.png";
 import "../styles/list-car.css";
-import { getCars } from "../service/car/car.service.index";
+import { deleteCar, getCars } from "../service/car/car.service.index";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -16,11 +16,13 @@ export const Route = createLazyFileRoute("/")({
 });
 
 function Index() {
+  const [id, setId] = useState("");
   const { token } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
   const [cars, setCars] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getCarData = async () => {
@@ -34,6 +36,18 @@ function Index() {
       getCarData();
     }
   }, [token]);
+
+  const onDelete = async (event) => {
+    event.preventDefault();
+    console.log(id);
+    const result = await deleteCar(id);
+    if (result?.success) {
+      navigate({ to: "/" });
+      setShowModal(false);
+      return;
+    }
+    alert(result?.message);
+  };
 
   return (
     <div className="container-fluid content-container p-3">
@@ -81,10 +95,13 @@ function Index() {
                   </p>
                   <div className="text-center">
                     <a
-                      href="#"
                       className="btn btn-primary delete-btn ps-4 pe-4 p-2 me-2"
                       data-bs-toggle="modal"
                       data-bs-target="#deleteConfirmation"
+                      onClick={() => {
+                        setId(car.id);
+                        setShowModal(true);
+                      }}
                     >
                       <img src={trashIc} alt="" /> Delete
                     </a>
@@ -102,41 +119,48 @@ function Index() {
         )}
       </div>
 
-      {/* Modal For Delete Confirmation */}
-      <div
-        className="modal fade"
-        id="deleteConfirmation"
-        tabIndex="-1"
-        aria-labelledby="deleteConfirmationLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-body">
-              <div className="text-center">
-                <img src={beepImg} alt="" className="w-50" />
-                <h5>Menghapus Data Mobil</h5>
-                <p>
-                  Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin
-                  ingin menghapus?
-                </p>
+      {/* Modal for Delete */}
+      {showModal && (
+        <div
+          className="modal fade"
+          id="deleteConfirmation"
+          tabIndex="-1"
+          aria-labelledby="deleteConfirmationLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-body">
+                <div className="text-center">
+                  <img src={beepImg} alt="" className="w-50" />
+                  <h5>Menghapus Data Mobil</h5>
+                  <p>
+                    Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin
+                    ingin menghapus?
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="modal-footer d-flex align-items-center justify-content-center">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Tidak
-              </button>
-              <button type="button" className="btn btn-primary">
-                Ya
-              </button>
+              <div className="modal-footer d-flex align-items-center justify-content-center">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  onClick={() => setShowModal(false)}
+                >
+                  Tidak
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={onDelete}
+                >
+                  Ya
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

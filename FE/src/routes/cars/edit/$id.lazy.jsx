@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import "../../../styles/update-car.css";
-import { updateStudent } from "../../../service/car/car.service.index";
+import { getDetailCar, updateStudent } from "../../../service/car/car.service.index";
+import { getTypes } from "../../../service/types-service";
 
 export const Route = createLazyFileRoute("/cars/edit/$id")({
   component: EditCar,
@@ -12,7 +13,7 @@ function EditCar() {
   const navigate = useNavigate();
 
   const [plate, setPlate] = useState("");
-  const [manufactures, setManufactures] = useState("");
+  const [manufactures, setManufactures] = useState([]);
   const [manufactureId, setManufactureId] = useState("");
   const [model, setModel] = useState("");
   const [rentPerDay, setRentPerDay] = useState("");
@@ -21,24 +22,98 @@ function EditCar() {
   const [availableAt, setAvailableAt] = useState("");
   const [transmission, setTransmission] = useState("");
   const [available, setAvailable] = useState("");
-  const [types, setTypes] = useState("");
+  const [types, setTypes] = useState([]);
   const [typeId, setTypeId] = useState("");
   const [year, setYear] = useState("");
-  const [options, setOptions] = useState("");
-  const [specs, setSpecs] = useState("");
+  const [options, setOptions] = useState([]);
+  const [specs, setSpecs] = useState([]);
   const [image, setImage] = useState("");
   const [currentImage, setCurrentImage] = useState("");
+  const [isNotFound, setIsNotFound] = useState(false);
 
-  // useEffect(() => {
-  //   // get data car
-  // })
+const getManufactures = async () => {
+  const token = localStorage.getItem("token");
+
+  let url = `${import.meta.env.VITE_API_URL}/manufactures`;
+
+  const response = await fetch(url, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+    method: "GET",
+  });
+
+  // get data
+  const result = await response.json();
+  return result;
+};
+
+  useEffect(() => {
+    // ambil data manufacture
+    const getManufacturesData = async () => {
+      const result = await getManufactures();
+      if (result?.success) {
+        setManufactures(result?.data);
+      }
+    };
+
+    // ambil data types
+    const getTypesData = async () => {
+      const result = await getTypes();
+      if (result?.success) {
+        setTypes(result?.data);
+      }
+    };
+
+    getManufacturesData();
+    getTypesData();
+  }, []);
+
+  useEffect(() => {
+    const getDetailCarData = async (id) => {
+      const result = await getDetailCar(id);
+      if(result?.success) {
+        const availableAtDate = result?.data.availableAt.split("T")[0];
+        setPlate(result?.data.plate);
+        setManufactureId(result?.data.manufacture_id);
+        setModel(result?.data.model);
+        setRentPerDay(result?.data.rentPerDay);
+        setCapacity(result?.data.capacity);
+        setDescription(result?.data.description);
+        setAvailableAt(availableAtDate);
+        setTransmission(result?.data.transmission);
+        setAvailable(result?.data.available);
+        setTypeId(result?.data.type_id);
+        setYear(result?.data.year);
+        setOptions(result?.data.options);
+        setSpecs(result?.data.specs);
+        setCurrentImage(result?.data.image);
+        setIsNotFound(false);
+      } else {
+        setIsNotFound(true);
+      }
+    }
+
+    if(id) {
+      getDetailCarData(id);
+    }
+  }, [id]);
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
+    const optionsArray =
+      typeof options === "string"
+        ? options.split(",").map((item) => item.trim())
+        : options;
+    const specsArray =
+      typeof specs === "string"
+        ? specs.split(",").map((item) => item.trim())
+        : specs;
+
     const request = {
       plate,
-      manufactures,
+      manufactureId,
       model,
       rentPerDay,
       capacity,
@@ -46,10 +121,10 @@ function EditCar() {
       availableAt,
       transmission,
       available,
-      types,
+      typeId,
       year,
-      options,
-      specs,
+      options: optionsArray,
+      specs: specsArray,
       image,
     };
 
@@ -65,7 +140,7 @@ function EditCar() {
   return (
     <div className="container-fluid content-container-add p-3">
       <h3>Edit Car</h3>
-      <form encType="multipart/form-data" className="add-form p-3">
+      <form encType="multipart/form-data" className="add-form p-3" onSubmit={onSubmit}>
         <div className="mb-3 row">
           <label htmlFor="inputPlate" className="col-sm-2 col-form-label">
             Plate
@@ -190,6 +265,7 @@ function EditCar() {
               required
               value={availableAt}
               onChange={(event) => {
+                console.log(event.target.value);
                 setAvailableAt(event.target.value);
               }}
             />
@@ -225,7 +301,7 @@ function EditCar() {
               id="inputAvailable"
               className="form-control form-select"
               value={available}
-              onChange={(event) => setAvailable(event.target.value === "true")}
+              onChange={(event) => setAvailable(event.target.value)}
             >
               <option selected disabled>
                 Select Available
@@ -256,7 +332,7 @@ function EditCar() {
                     key={type?.id}
                     selected={type.id == typeId}
                   >
-                    {type.name}
+                    {type.type}
                   </option>
                 ))}
             </select>
