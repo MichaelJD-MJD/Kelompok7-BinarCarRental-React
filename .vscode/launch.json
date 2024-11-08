@@ -14,11 +14,27 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Chapter 4 - Cars API",
+            "name": "Cars API",
             "skipFiles": ["<node_internals>/**"],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/BE",
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run-script", "dev"]
+        },
+        {
+            "name": "React - Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/FE"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "React - Vite",
+            "skipFiles": ["<node_internals>/**"],
+            "cwd": "${workspaceFolder}/FE",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"] // Corrected this line
         }
     ]
 }
