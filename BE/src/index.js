@@ -9,7 +9,13 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://kelompok7-binar-car-rental-react.vercel.app/", // Ganti dengan URL frontend Anda di Vercel
+    methods: ["GET", "POST", "PUT", "DELETE"], // Atur metode HTTP yang diizinkan
+    credentials: true, // Jika Anda mengirim cookie atau kredensial lain
+  })
+);
 
 app.use(express.json());
 
