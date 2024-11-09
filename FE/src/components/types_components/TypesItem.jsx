@@ -65,10 +65,7 @@ const TypeItem = ({ type }) => {
       if (result?.success) {
         toast.success("Type deleted successfully");
         setShowModal(false);
-        navigate({
-          to: `/types?refresh=${new Date().getTime()}`,
-          replace: true,
-        });
+        window.location.reload();
       } else {
         toast.error(result?.message || "Failed to delete");
       }
@@ -137,9 +134,9 @@ const TypeItem = ({ type }) => {
               <div className="modal-body">
                 <div className="text-center">
                   <img src={DeleteConfirm} alt="" className="w-50" />
-                  <h5>Menghapus Data Mobil</h5>
+                  <h5>Menghapus Data Types</h5>
                   <p>
-                    Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin
+                    Setelah dihapus, data Types tidak dapat dikembalikan. Yakin
                     ingin menghapus?
                   </p>
                 </div>
