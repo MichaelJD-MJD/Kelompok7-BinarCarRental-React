@@ -5,9 +5,7 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useSelector } from "react-redux";
-import { deleteType, getDetailType } from "../../service/types-service";
-import { toast } from "react-toastify";
-import { confirmAlert } from "react-confirm-alert";
+import { getDetailType } from "../../service/types-service";
 import Protected from "../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/types-routes/$id")({
@@ -65,33 +63,6 @@ function TypeDetail() {
       </Row>
     );
   }
-
-  const onDelete = async (event) => {
-    event.preventDefault();
-
-    confirmAlert({
-      title: "Confirm to delete",
-      message: "Are you sure to delete this data?",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: async () => {
-            const result = await deleteType(id);
-            if (result?.success) {
-              navigate({ to: "/types" });
-              return;
-            }
-
-            toast.error(result?.message);
-          },
-        },
-        {
-          label: "No",
-          onClick: () => {},
-        },
-      ],
-    });
-  };
 
   return (
     <Row className="mt-5">

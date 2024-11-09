@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import PropTypes from "prop-types";
 import Col from "react-bootstrap/Col";
@@ -12,6 +12,8 @@ import Edit from "../../assets/fi_edit.png";
 import DeleteConfirm from "../../assets/img-BeepBeep.png";
 
 const TypeItem = ({ type }) => {
+  const { id } = Route.useParams();
+
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,23 +21,54 @@ const TypeItem = ({ type }) => {
   const [showModal, setShowModal] = useState(false); // State for modal visibility
   const [typeToDelete, setTypeToDelete] = useState(null); // State to hold type data to delete
 
-  const getDetailTypeData = async (id) => {
-    setIsLoading(true);
-    const result = await getDetailType(id);
-    if (result?.success) {
-      setIsNotFound(false);
-    } else {
-      setIsNotFound(true);
+  useEffect(() => {
+    const getDetailTypeData = async (id) => {
+      setIsLoading(true);
+      const result = await getDetailType(id);
+      if (result?.success) {
+        setType(result.data);
+        setIsNotFound(false);
+      } else {
+        setIsNotFound(true);
+      }
+      setIsLoading(false);
+    };
+
+    if (id) {
+      getDetailTypeData(id);
     }
-    setIsLoading(false);
-  };
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <Row className="mt-5">
+        <Col>
+          <h1 className="text-center">Loading...</h1>
+        </Col>
+      </Row>
+    );
+  }
+
+  if (isNotFound) {
+    return (
+      <Row className="mt-5">
+        <Col>
+          <h1 className="text-center">Type is not found!</h1>
+        </Col>
+      </Row>
+    );
+  }
 
   const onDelete = async () => {
     if (typeToDelete) {
       const result = await deleteType(typeToDelete.id); // Use the selected type's ID to delete
       if (result?.success) {
         toast.success("Type deleted successfully");
-        navigate({ to: "/types", replace: true });
+        setShowModal(false);
+        navigate({
+          to: `/types?refresh=${new Date().getTime()}`,
+          replace: true,
+        });
       } else {
         toast.error(result?.message || "Failed to delete");
       }
