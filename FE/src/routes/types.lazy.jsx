@@ -1,4 +1,3 @@
-import * as React from "react";
 import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

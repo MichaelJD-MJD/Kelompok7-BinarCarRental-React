@@ -1,16 +1,15 @@
-import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useSelector } from "react-redux";
 import { getDetailType } from "../../service/types-service";
 import Protected from "../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/types-routes/$id")({
   component: () => (
-    <Protected roles={[1]}>
+    <Protected roles={[1,2]}>
       <TypeDetail />
     </Protected>
   ),
@@ -19,9 +18,6 @@ export const Route = createLazyFileRoute("/types-routes/$id")({
 function TypeDetail() {
   const { id } = Route.useParams();
 
-  const navigate = useNavigate();
-
-  const { user, token } = useSelector((state) => state.auth);
   const [type, setType] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);

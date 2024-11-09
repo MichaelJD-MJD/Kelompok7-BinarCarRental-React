@@ -1,4 +1,4 @@
-import { createLazyFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createLazyFileRoute, Link } from "@tanstack/react-router";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -10,8 +10,6 @@ export const Route = createLazyFileRoute("/manufactures/$id")({
 
 function ManufactureDetail() {
     const { id } = Route.useParams();
-
-    const navigate = useNavigate();
 
     const [manufacture, setManufacture] = useState(null);
     const [isLoading, setIsLoading] = useState(false);

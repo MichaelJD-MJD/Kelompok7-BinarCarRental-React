@@ -1,6 +1,4 @@
-import * as React from "react";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getDetailCar } from "../../service/car/car.service.index";
 import { Button, Col, Row } from "react-bootstrap";
