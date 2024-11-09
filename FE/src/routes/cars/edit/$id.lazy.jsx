@@ -3,9 +3,14 @@ import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import "../../../styles/update-car.css";
 import { getDetailCar, updateStudent } from "../../../service/car/car.service.index";
 import { getTypes } from "../../../service/types-service";
+import Protected from "../../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/cars/edit/$id")({
-  component: EditCar,
+  component: () => (
+    <Protected roles={[1]}>
+      <EditCar />
+    </Protected>
+  ),
 });
 
 function EditCar() {
