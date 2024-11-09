@@ -3,12 +3,17 @@ import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import "../../styles/add-car.css";
 import { createCar } from "../../service/car/car.service.index";
 import { getTypes } from "../../service/types-service";
+import Protected from "../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/cars/create")({
-  component: RouteComponent,
+  component: () => (
+    <Protected roles={[1]}>
+      <CreateCar />
+    </Protected>
+  ),
 });
 
-function RouteComponent() {
+function CreateCar() {
   const navigate = useNavigate();
 
   const [plate, setPlate] = useState("");
