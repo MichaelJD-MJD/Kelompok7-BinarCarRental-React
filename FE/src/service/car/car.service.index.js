@@ -36,7 +36,7 @@ export const createCar = async (request) => {
 
     const formData = new FormData();
     formData.append("plate", request.plate);
-    formData.append("manufacture_id", request.manufacture_id);
+    formData.append("manufacture_id", request.manufactureId);
     formData.append("model", request.model);
     formData.append("rentPerDay", request.rentPerDay);
     formData.append("capacity", request.capacity);
@@ -44,7 +44,7 @@ export const createCar = async (request) => {
     formData.append("availableAt", request.availableAt);
     formData.append("transmission", request.transmission);
     formData.append("available", request.available);
-    formData.append("type_id", request.type_id);
+    formData.append("type_id", request.typeId);
     formData.append("year", request.year);
     formData.append("options", request.options);
     formData.append("specs", request.specs);
@@ -68,7 +68,7 @@ export const updateStudent = async (id, request) => {
 
     const formData = new FormData();
     formData.append("plate", request.plate);
-    formData.append("manufacture_id", request.manufacture_id);
+    formData.append("manufacture_id", request.manufactureId);
     formData.append("model", request.model);
     formData.append("rentPerDay", request.rentPerDay);
     formData.append("capacity", request.capacity);
@@ -76,7 +76,7 @@ export const updateStudent = async (id, request) => {
     formData.append("availableAt", request.availableAt);
     formData.append("transmission", request.transmission);
     formData.append("available", request.available);
-    formData.append("type_id", request.type_id);
+    formData.append("type_id", request.typeId);
     formData.append("year", request.year);
     formData.append("options", request.options);
     formData.append("specs", request.specs);

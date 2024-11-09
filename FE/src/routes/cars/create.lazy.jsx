@@ -3,16 +3,21 @@ import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import "../../styles/add-car.css";
 import { createCar } from "../../service/car/car.service.index";
 import { getTypes } from "../../service/types-service";
+import Protected from "../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/cars/create")({
-  component: RouteComponent,
+  component: () => (
+    <Protected roles={[1]}>
+      <CreateCar />
+    </Protected>
+  ),
 });
 
-function RouteComponent() {
+function CreateCar() {
   const navigate = useNavigate();
 
   const [plate, setPlate] = useState("");
-  const [manufactures, setManufactures] = useState("");
+  const [manufactures, setManufactures] = useState([]);
   const [manufactureId, setManufactureId] = useState("");
   const [model, setModel] = useState("");
   const [rentPerDay, setRentPerDay] = useState("");
@@ -21,34 +26,67 @@ function RouteComponent() {
   const [availableAt, setAvailableAt] = useState("");
   const [transmission, setTransmission] = useState("");
   const [available, setAvailable] = useState("");
-  const [types, setTypes] = useState("");
+  const [types, setTypes] = useState([]);
   const [typeId, setTypeId] = useState("");
   const [year, setYear] = useState("");
-  const [options, setOptions] = useState("");
-  const [specs, setSpecs] = useState("");
+  const [options, setOptions] = useState([]);
+  const [specs, setSpecs] = useState([]);
   const [image, setImage] = useState("");
   const [currentImage, setCurrentImage] = useState("");
 
+  const getManufactures = async () => {
+    const token = localStorage.getItem("token");
+
+    let url = `${import.meta.env.VITE_API_URL}/manufactures`;
+
+    const response = await fetch(url, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    });
+
+    // get data
+    const result = await response.json();
+    return result;
+  }
+
     useEffect(() => {
       // ambil data manufacture
+      const getManufacturesData = async () => {
+        const result = await getManufactures();
+        if(result?.success) {
+          setManufactures(result?.data);
+        }
+      }
+
       // ambil data types
       const getTypesData = async () => {
         const result = await getTypes();
-        console.log(result);
         if(result?.success) {
           setTypes(result?.data);
         }
       };
 
+      getManufacturesData();
       getTypesData();
     }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
+     const optionsArray =
+       typeof options === "string"
+         ? options.split(",").map((item) => item.trim())
+         : options;
+     const specsArray =
+       typeof specs === "string"
+         ? specs.split(",").map((item) => item.trim())
+         : specs;
+
     const request = {
       plate,
-      manufactures,
+      manufactureId,
       model,
       rentPerDay,
       capacity,
@@ -56,12 +94,14 @@ function RouteComponent() {
       availableAt,
       transmission,
       available,
-      types,
+      typeId,
       year,
-      options,
-      specs,
+      options: optionsArray,
+      specs: specsArray,
       image,
     };
+
+    console.log(request);
 
     const result = await createCar(request);
     if (result?.success) {
@@ -235,7 +275,7 @@ function RouteComponent() {
               id="inputAvailable"
               className="form-control form-select"
               value={available}
-              onChange={(event) => setAvailable(event.target.value === "true")}
+              onChange={(event) => setAvailable(event.target.value)}
             >
               <option selected disabled>
                 Select Available

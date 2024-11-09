@@ -1,0 +1,76 @@
+.content-container {
+    background-color: #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content-container .add-btn {
+    background-color: #0d28a6;
+    color: white;
+}
+
+.content-container .add-btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.content-container .size-filter {
+    border: 1px solid #aeb7e1;
+    color: #aeb7e1;
+    background-color: white;
+}
+
+.content-container .size-filter:hover {
+    background-color: #cfd4ed;
+    color: #0d28a6;
+    border: 1px solid #0d28a6;
+    font-weight: bold;
+}
+
+.content-container .card {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    height: 100%;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.content-container .card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-container .card .card-img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.content-container .card h6 {
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.content-container .card h5 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.content-container .card p {
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.content-container .card .delete-btn {
+    background-color: #fff;
+    color: #fa2c5a;
+    border: 1px solid #fa2c5a;
+    font-size: 14px;
+}
+
+.content-container .card .edit-btn {
+    background-color: #5cb85f;
+    border: 1px solid #5cb85f;
+    font-size: 14px;
+}
