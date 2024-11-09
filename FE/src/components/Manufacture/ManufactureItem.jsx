@@ -76,8 +76,8 @@ const ManufactureItem = ({ manufacture }) => {
                                     {manufacture?.office}
                                 </ListGroup.Item>
                             </ListGroup>
-                            <Card.Body className="d-flex flex-row justify-content-center">
-                                {user && user?.role_id === 1 && (
+                            {user && user?.role_id === 1 && (
+                                <Card.Body className="d-flex flex-row justify-content-center">
                                     <Button
                                         variant="danger"
                                         className="btn-del px-4 p-2 mx-1"
@@ -127,8 +127,6 @@ const ManufactureItem = ({ manufacture }) => {
                                         </svg>
                                         &nbsp;Delete
                                     </Button>
-                                )}
-                                {user && user?.role_id === 1 && (
                                     <Button
                                         variant="success"
                                         className="btn-up px-4 p-2 mx-1"
@@ -171,8 +169,8 @@ const ManufactureItem = ({ manufacture }) => {
                                         </svg>
                                         &nbsp;Edit
                                     </Button>
-                                )}
-                            </Card.Body>
+                                </Card.Body>
+                            )}
                         </Card>
                     </div>
                 </Col>
