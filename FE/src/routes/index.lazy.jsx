@@ -6,9 +6,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CarItem from "../components/cars_components/CarItem";
 import { Col, Row } from "react-bootstrap";
+import Protected from "../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/")({
-  component: Index,
+    component: () => (
+        <Protected roles={[1,2]}>
+            <Index />
+        </Protected>
+    ),
 });
 
 function Index() {

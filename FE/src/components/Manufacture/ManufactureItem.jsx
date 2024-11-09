@@ -79,7 +79,8 @@ const ManufactureItem = ({ manufacture }) => {
                             <Card.Body className="d-flex flex-row justify-content-center">
                                 {user && user?.role_id === 1 && (
                                     <Button
-                                        className="btn-del btn btn-primary px-4 p-2 mx-1"
+                                        variant="danger"
+                                        className="btn-del px-4 p-2 mx-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteConfirmation"
                                         onClick={(e) => {
@@ -87,7 +88,6 @@ const ManufactureItem = ({ manufacture }) => {
                                             setShowModal(true);
                                             e.stopPropagation();
                                         }}
-                                        variant="danger"
                                     >
                                         <svg
                                             width="19"
@@ -130,10 +130,10 @@ const ManufactureItem = ({ manufacture }) => {
                                 )}
                                 {user && user?.role_id === 1 && (
                                     <Button
-                                        className="btn-up btn btn-primary px-4 p-2 mx-1"
+                                        variant="success"
+                                        className="btn-up px-4 p-2 mx-1"
                                         as={Link}
                                         href={`/manufactures/edit/${manufacture?.id}`}
-                                        variant="success"
                                     >
                                         <svg
                                             width="19"

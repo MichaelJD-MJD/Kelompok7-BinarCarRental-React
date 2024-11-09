@@ -11,7 +11,7 @@ import Protected from "../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/types")({
   component: () => (
-    <Protected roles={[1]}>
+    <Protected roles={[1,2]}>
       <Types />
     </Protected>
   ),

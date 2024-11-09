@@ -12,14 +12,14 @@ import Protected from "../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/manufactures/")({
     component: () => (
-        <Protected roles={[1]}>
+        <Protected roles={[1, 2]}>
             <Index />
         </Protected>
     ),
 });
 
 function Index() {
-    const { token } = useSelector((state) => state.auth);
+    const { user, token } = useSelector((state) => state.auth);
     const [manufacture, setManufacture] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -32,17 +32,15 @@ function Index() {
                 console.log("Result from getManufacture:", result);
                 if (result.success) {
                     setManufacture(result.data);
-                }else {
+                } else {
                     console.warn("Failed to fetch manufacture data");
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 console.error("Error fetching manufacture data:", error);
-            }
-            finally {
+            } finally {
                 setIsLoading(false);
                 console.log("Finished loading manufacture data");
-            }            
+            }
         };
 
         if (token) {
@@ -76,16 +74,18 @@ function Index() {
                 <div className="col-10">
                     <h3>List Manufacture</h3>
                 </div>
-                <div className="col-2">
-                    <button className="btn add-btn">
-                        <img src={plusIc} alt="" />
-                        <span>
-                            <Link to={"/manufactures/create"}>
-                                Add New Manufacture
-                            </Link>
-                        </span>
-                    </button>
-                </div>
+                {user && user?.role_id === 1 && (
+                    <div className="col-2">
+                        <button className="btn add-btn">
+                            <img src={plusIc} alt="" />
+                            <span>
+                                <Link to={"/manufactures/create"}>
+                                    Add New Manufacture
+                                </Link>
+                            </span>
+                        </button>
+                    </div>
+                )}
             </div>
             <div className="row mb-2">
                 <div className="col d-flex p-0">
@@ -117,7 +117,7 @@ function Index() {
                     ))
                 )}
                 {/* </div> */}
-            </div>            
+            </div>
         </div>
     );
 }

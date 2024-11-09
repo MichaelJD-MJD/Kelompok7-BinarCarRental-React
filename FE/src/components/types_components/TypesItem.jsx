@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import PropTypes from "prop-types";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { deleteType, getDetailType } from "../../service/types-service";
 import { toast } from "react-toastify";

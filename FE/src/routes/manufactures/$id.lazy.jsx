@@ -89,7 +89,7 @@ function ManufactureDetail() {
                         <Button
                             variant="outline-dark"
                             className="d-flex align-items-center"
-                            style={{ fontWeight: 700, width: "65px" }}
+                            style={{ fontWeight: 700, width: "4.063rem" }}
                             as={Link}
                             to="/manufactures"
                         >
