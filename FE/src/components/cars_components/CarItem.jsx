@@ -8,23 +8,12 @@ import "../../styles/list-car.css";
 import { deleteCar } from "../../service/car/car.service.index";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { getDetailCar } from "../../service/car/car.service.index";
 
 const CarItem = ({ car }) => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const [isNotFound, setIsNotFound] = useState(false);
   const [showModal, setShowModal] = useState(false); // State for modal visibility
   const [carToDelete, setcarToDelete] = useState(null);
-
-  const getDetailCarData = async (id) => {
-    const result = await getDetailCar(id);
-    if(result?.success) {
-        setIsNotFound(false);
-    }else {
-        setIsNotFound(true);
-    }
-  };
 
   const onDelete = async () => {
     if(carToDelete){
