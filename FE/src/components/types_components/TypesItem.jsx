@@ -19,24 +19,6 @@ const TypeItem = ({ type }) => {
   const [showModal, setShowModal] = useState(false); // State for modal visibility
   const [typeToDelete, setTypeToDelete] = useState(null); // State to hold type data to delete
 
-  useEffect(() => {
-    const getDetailTypeData = async (id) => {
-      setIsLoading(true);
-      const result = await getDetailType(id);
-      if (result?.success) {
-        setType(result.data);
-        setIsNotFound(false);
-      } else {
-        setIsNotFound(true);
-      }
-      setIsLoading(false);
-    };
-
-    if (id) {
-      getDetailTypeData(id);
-    }
-  }, [id]);
-
   if (isLoading) {
     return (
       <Row className="mt-5">
