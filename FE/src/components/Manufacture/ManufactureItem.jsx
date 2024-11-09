@@ -66,11 +66,13 @@ const ManufactureItem = ({ manufacture }) => {
                         <Card.Body className="d-flex flex-row justify-content-center">
                             <Button
                                 className="btn-del btn btn-primary px-4 p-2 mx-1"
-                                onAbort={(e) => {
-                                        setManufactureToDelete(manufacture);
-                                        setShowModal(true);
-                                        e.stopPropagation();
-                                    }}
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteConfirmation"
+                                onClick={(e) => {
+                                    setManufactureToDelete(manufacture);
+                                    setShowModal(true);
+                                    e.stopPropagation();
+                                }}
                                 variant="danger"
                             >
                                 <svg

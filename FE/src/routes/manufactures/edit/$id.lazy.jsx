@@ -66,7 +66,7 @@ function EditManufacture() {
         };
         const result = await updateManufacture(id, request);
         if (result?.success) {
-            navigate({ to: `/types` });
+            navigate({ to: `/manufactures` });
             return;
         }
 

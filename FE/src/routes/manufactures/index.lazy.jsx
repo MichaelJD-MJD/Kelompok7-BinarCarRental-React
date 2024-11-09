@@ -26,12 +26,24 @@ function Index() {
 
     useEffect(() => {
         const getManufactureData = async () => {
-            setIsLoading(true);
-            const result = await getManufacture();
-            if (result.success) {
-                setManufacture(result.data);
+            try {
+                setIsLoading(true);
+                console.log("Fetching manufacture data...");
+                const result = await getManufacture();
+                console.log("Result from getManufacture:", result);
+                if (result.success) {
+                    setManufacture(result.data);
+                }else {
+                    console.warn("Failed to fetch manufacture data");
+                }
             }
-            setIsLoading(false);
+            catch (error) {
+                console.error("Error fetching manufacture data:", error);
+            }
+            finally {
+                setIsLoading(false);
+                console.log("Finished loading manufacture data");
+            }            
         };
 
         if (token) {
