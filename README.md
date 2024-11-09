@@ -1,9 +1,15 @@
-# Kelompok7-BinarCarRental-React
-Email admin : admin@gmail.com
-Pw admin : admin
-Untuk user biasa, bisa dilakukan create langsung pada halaman website
+# Kelompok7 - Binar Car Rental (React)
 
-Pembagian Tugas:
-Michael : Mengerjakan Tampilan Login, Register, Navbar, Sidebar, dan CRUD Car
-Bhisma : Mengerjakan CRUD Manufacture
-David : Mengerjakan CRUD Type dan Menambahkan Protected Auth
+### Informasi Akun
+- **Email Admin:** `admin@gmail.com`
+- **Password Admin:** `admin`
+  
+**Note:** Pengguna biasa dapat melakukan pendaftaran langsung melalui halaman website.
+
+### Pembagian Tugas
+
+| Nama      | Tugas                                                                                   |
+|-----------|-----------------------------------------------------------------------------------------|
+| Michael   | Mengerjakan tampilan Login, Register, Navbar, Sidebar, dan CRUD Car                     |
+| Bhisma    | Mengerjakan CRUD Manufacture                                                            |
+| David     | Mengerjakan CRUD Type dan Menambahkan Proteksi Autentikasi (Protected Auth)
