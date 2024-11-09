@@ -12,8 +12,6 @@ import Edit from "../../assets/fi_edit.png";
 import DeleteConfirm from "../../assets/img-BeepBeep.png";
 
 const TypeItem = ({ type }) => {
-  const { id } = Route.useParams();
-
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
