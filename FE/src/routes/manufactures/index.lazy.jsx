@@ -9,9 +9,14 @@ import "../../styles/manufactures/manufacture.css";
 
 import ManufactureItem from "../../components/Manufacture/ManufactureItem";
 import { getManufacture } from "../../service/manufacture";
+import Protected from "../../components/Auth/Protected";
 
 export const Route = createLazyFileRoute("/manufactures/")({
-    component: Index,
+    component: () => (
+        <Protected roles={[1]}>
+            <Index />
+        </Protected>
+    ),
 });
 
 function Index() {
@@ -39,7 +44,7 @@ function Index() {
             <Row className="mt-4">
                 <Col>
                     <h1 className="text-center">
-                        Please login first to get cars data!
+                        Please login first to get manufacture data!
                     </h1>
                 </Col>
             </Row>
