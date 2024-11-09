@@ -4,7 +4,6 @@ import { Row, Col } from "react-bootstrap";
 import { createLazyFileRoute, Link } from "@tanstack/react-router";
 
 import plusIc from "../../assets/icon/fi_plus.png";
-import beepImg from "../../assets/img-BeepBeep.png";
 import "../../styles/manufactures/manufacture.css";
 
 import ManufactureItem from "../../components/Manufacture/ManufactureItem";
@@ -75,7 +74,7 @@ function Index() {
         <div className="container-fluid content-container p-3">
             <div className="row">
                 <div className="col-10">
-                    <h3>List Car</h3>
+                    <h3>List Manufacture</h3>
                 </div>
                 <div className="col-2">
                     <button className="btn add-btn">
@@ -118,43 +117,7 @@ function Index() {
                     ))
                 )}
                 {/* </div> */}
-            </div>
-
-            {/* Modal For Delete Confirmation */}
-            <div
-                className="modal fade"
-                id="deleteConfirmation"
-                tabIndex="-1"
-                aria-labelledby="deleteConfirmationLabel"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="text-center">
-                                <img src={beepImg} alt="" className="w-50" />
-                                <h5>Menghapus Data Mobil</h5>
-                                <p>
-                                    Setelah dihapus, data mobil tidak dapat
-                                    dikembalikan. Yakin ingin menghapus?
-                                </p>
-                            </div>
-                        </div>
-                        <div className="modal-footer d-flex align-items-center justify-content-center">
-                            <button
-                                type="button"
-                                className="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                            >
-                                Tidak
-                            </button>
-                            <button type="button" className="btn btn-primary">
-                                Ya
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>            
         </div>
     );
 }
