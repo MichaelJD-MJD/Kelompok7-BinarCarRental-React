@@ -1,76 +1,447 @@
+/* Manufacture Dashboard - Consistent with Car List */
 .content-container {
-    background-color: #e5e5e5;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 16px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100vh - 100px);
 }
 
+.content-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #0d28a6 0%, #1e40af 50%, #2563eb 100%);
+}
+
+/* Header Section */
+.content-container h3 {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0d28a6 0%, #1e40af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0;
+  letter-spacing: -0.5px;
+}
+
+/* Add Button - Premium Style */
 .content-container .add-btn {
-    background-color: #0d28a6;
-    color: white;
+  background: linear-gradient(135deg, #0d28a6 0%, #1e40af 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(13, 40, 166, 0.3);
+}
+
+.content-container .add-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.content-container .add-btn:hover {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(13, 40, 166, 0.4);
+}
+
+.content-container .add-btn:hover::before {
+  left: 100%;
+}
+
+.content-container .add-btn img {
+  margin-right: 8px;
+  filter: brightness(0) invert(1);
 }
 
 .content-container .add-btn a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
 }
 
+/* Filter Buttons - Sleek Design */
 .content-container .size-filter {
-    border: 1px solid #aeb7e1;
-    color: #aeb7e1;
-    background-color: white;
+  border: 2px solid #cbd5e1;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 10px 20px !important;
+  margin: 8px !important;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
 .content-container .size-filter:hover {
-    background-color: #cfd4ed;
-    color: #0d28a6;
-    border: 1px solid #0d28a6;
-    font-weight: bold;
+  background: linear-gradient(135deg, #0d28a6 0%, #1e40af 100%);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(13, 40, 166, 0.3);
 }
 
+.content-container .size-filter.active {
+  background: linear-gradient(135deg, #0d28a6 0%, #1e40af 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(13, 40, 166, 0.4);
+}
+
+/* Manufacture Cards - Premium Design */
 .content-container .card {
-    display: flex;
-    flex-direction: column;
-    max-width: 350px;
-    height: 100%;
-    margin-left: 4px;
-    margin-right: 4px;
+  display: flex;
+  flex-direction: column;
+  max-width: 360px;
+  height: 100%;
+  margin: 12px;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.content-container .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.content-container .card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 10px 20px -5px rgba(0, 0, 0, 0.1);
+}
+
+.content-container .card:hover::before {
+  transform: scaleX(1);
 }
 
 .content-container .card .card-body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
 }
 
 .content-container .card .card-img {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
+.content-container .card:hover .card-img {
+  transform: scale(1.05);
+}
+
+/* Card Typography */
 .content-container .card h6 {
-    font-size: 14px;
-    font-weight: 100;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .content-container .card h5 {
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
 }
 
 .content-container .card p {
-    font-size: 14px;
-    font-weight: lighter;
+  font-size: 14px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.5;
+  flex-grow: 1;
+  margin-bottom: 1rem;
 }
 
+/* Manufacture Specific Styling */
+.content-container .card .manufacture-info {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #f59e0b;
+}
+
+.content-container .card .manufacture-info .country {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f59e0b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+}
+
+.content-container .card .manufacture-info .established {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Action Buttons - Modern Style */
 .content-container .card .delete-btn {
-    background-color: #fff;
-    color: #fa2c5a;
-    border: 1px solid #fa2c5a;
-    font-size: 14px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-right: 8px;
+}
+
+.content-container .card .delete-btn:hover {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
 }
 
 .content-container .card .edit-btn {
-    background-color: #5cb85f;
-    border: 1px solid #5cb85f;
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.content-container .card .edit-btn:hover {
+  background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Stats Cards for Manufacture */
+.content-container .stats-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.content-container .stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.content-container .stats-card .stats-number {
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.content-container .stats-card .stats-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Empty State Styling */
+.content-container .row h1 {
+  color: #64748b;
+  font-weight: 600;
+  text-align: center;
+  margin: 3rem 0;
+  font-size: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .content-container .card {
+    max-width: calc(50% - 24px);
+  }
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    border-radius: 12px;
+    margin: 0 8px;
+  }
+
+  .content-container h3 {
+    font-size: 28px;
+    margin-bottom: 1rem;
+  }
+
+  .content-container .add-btn {
+    width: 100%;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
+  .content-container .size-filter {
+    flex: 1;
+    text-align: center;
+    margin: 4px !important;
+    padding: 8px 12px !important;
     font-size: 14px;
+  }
+
+  .content-container .card {
+    max-width: 100%;
+    margin: 8px 0;
+  }
+
+  .content-container .col-10,
+  .content-container .col-2 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .content-container .col-2 {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+
+  .content-container .stats-card .stats-number {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-container {
+    margin: 0 4px;
+  }
+
+  .content-container h3 {
+    font-size: 24px;
+  }
+
+  .content-container .size-filter {
+    font-size: 12px;
+    padding: 6px 10px !important;
+  }
+
+  .content-container .card .card-body {
+    padding: 1rem;
+  }
+
+  .content-container .card h5 {
+    font-size: 18px;
+  }
+
+  .content-container .card .manufacture-info {
+    padding: 0.75rem;
+  }
+
+  .content-container .stats-card {
+    padding: 1rem;
+  }
+
+  .content-container .stats-card .stats-number {
+    font-size: 24px;
+  }
+}
+
+/* Animation for loading */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Manufacture specific animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-container .card {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.content-container .card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.content-container .card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.content-container .card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.content-container .card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.content-container .card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.content-container .card:nth-child(6) {
+  animation-delay: 0.6s;
 }

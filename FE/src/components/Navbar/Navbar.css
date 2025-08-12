@@ -1,52 +1,133 @@
+/* Gaya umum navbar */
+.navbar-container {
+  background-color: #ffffff; /* Putih bersih */
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1rem 2rem; /* Spacing yang lebih luas */
+}
+
+/* Logo dan Brand */
+.navbar-container .navbar-brand {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #000000; /* Warna teks hitam */
+}
+
+/* Navigasi dan Form */
+.navbar-container .navbar-nav {
+  align-items: center;
+}
+
+/* Gaya input search */
+.navbar-container .form-control {
+  border-radius: 20px; /* Sudut membulat */
+  border-color: #e2e8f0;
+  box-shadow: none;
+}
+
+.navbar-container .form-control:focus {
+  border-color: #0d6efd; /* Biru Toyota */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Tombol Search */
+.navbar-container .btn-outline-primary {
+  color: #0d6efd; /* Biru Toyota */
+  border-color: #0d6efd;
+  border-radius: 20px; /* Sudut membulat */
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-container .btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+
+/* Tombol Profile */
 .navbar-container .profilePicture-btn {
   border: none;
-  padding: 0;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
   display: flex;
   align-items: center;
-  gap: 8px; /* Jarak antara icon profile dan nama */
+  gap: 10px; /* Jarak yang lebih rapi */
+  border-radius: 20px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.navbar-container .profilePicture-btn:hover {
+  background-color: #f1f5f9; /* Warna abu-abu terang saat di-hover */
 }
 
 .navbar-container .profilePicture-btn .profilePicture-img {
-  max-width: 40px; /* Ukuran logo sesuai kebutuhan */
+  max-width: 40px; /* Ukuran yang ideal */
   height: auto;
+  border-radius: 50%; /* Bulat untuk foto profil */
+  border: 2px solid #e2e8f0;
 }
 
-.navbar-container form {
-  margin-right: 8px; /* Jarak antara form search dan elemen profile */
+.navbar-container .profilePicture-btn .ms-2 {
+  font-weight: 500;
+  color: #333333;
 }
 
-.navbar-container .btn-outline-primary {
-  color: #0d6efd;
-  border-color: #0d6efd;
+/* Dropdown menu */
+.navbar-container .dropdown-menu {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsivitas untuk layar kecil */
+/* --- Responsivitas --- */
+
+/* Mobile (<= 576px) */
 @media (max-width: 576px) {
+  .navbar-container {
+    padding: 1rem;
+  }
+
+  .navbar-container .navbar-brand {
+    font-size: 1.25rem;
+  }
+
   .navbar-container .navbar-nav {
-    flex-direction: column; /* Ubah menjadi kolom untuk perangkat kecil */
-    align-items: flex-start; /* Rata kiri */
+    width: 100%;
   }
 
   .navbar-container form {
-    margin-right: 0; /* Hilangkan margin kanan pada form */
-    margin-bottom: 8px; /* Tambahkan margin bawah untuk jarak */
-    width: 100%; /* Penuhi lebar form */
+    margin-right: 0;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  .navbar-container .d-flex {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .navbar-container .btn-outline-primary {
+    width: 100%;
   }
 
   .navbar-container .profilePicture-btn {
-    width: 100%; /* Penuhi lebar untuk tombol profile */
-    justify-content: flex-start; /* Rata kiri untuk isi tombol */
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 
-/* Responsivitas untuk tablet */
-@media (min-width: 576px) and (max-width: 768px) {
+/* Tablet (577px - 992px) */
+@media (min-width: 577px) and (max-width: 992px) {
   .navbar-container .navbar-nav {
-    flex-direction: row; /* Kembalikan ke baris untuk tablet */
-    justify-content: flex-end; /* Rata kanan */
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .navbar-container .d-flex {
+    flex-direction: row;
   }
 
   .navbar-container form {
-    margin-bottom: 0; /* Hilangkan margin bawah pada form */
+    margin-bottom: 0;
   }
 }

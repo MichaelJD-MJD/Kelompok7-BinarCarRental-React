@@ -1,15 +1,15 @@
 import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import bannerImg from '../assets/login.png'
-import logo from '../assets/icon/logo.png'
-import "../styles/login.css"
+import bannerImg from "../assets/login.png";
+import logo from "../assets/icon/logo.png";
+import "../styles/login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { login } from "../service/auth/auth.service";
 import { setToken } from "../redux/slices/auth";
 
-export const Route = createLazyFileRoute('/login')({
+export const Route = createLazyFileRoute("/login")({
   component: Login,
-})
+});
 
 function Login() {
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ function Login() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if(token) {
-      navigate({to: "/"});
+    if (token) {
+      navigate({ to: "/" });
     }
   }, [navigate, token]);
 
@@ -32,23 +32,24 @@ function Login() {
 
     // define the request body
     const body = {
-      email, password,
+      email,
+      password,
     };
 
     // hit the login API with the data
     const result = await login(body);
 
-    if(result.success){
+    if (result.success) {
       // set token to global state
       dispatch(setToken(result.data.token));
 
       // redirect to home
-      navigate({to:"/"});
+      navigate({ to: "/" });
       return;
     }
 
-    alert (result.message);
-  }
+    alert(result.message);
+  };
 
   return (
     <div className="container-fluid login-container">
@@ -64,7 +65,7 @@ function Login() {
               </div>
             </div>
             <div className="row mt-4">
-              <h3>Welcome, Sign In to BCR</h3>
+              <h3>Welcome, Sign to TAM RENT CAR</h3>
               <form className="mt-3" onSubmit={onSubmit}>
                 <div className="mb-3">
                   <label htmlFor="inputEmail" className="form-label">
